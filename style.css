@@ -1,0 +1,441 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #111;
+    background: #fff;
+    scroll-behavior: smooth;
+}
+
+p,
+li,
+span {
+    font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scroll {
+    padding: 8px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.navbar a {
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #111;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.navbar a:hover {
+    opacity: 0.6;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    padding-top: 80px;
+    background: url('./img/1cc855e5-a5ad-4083-84c8-be638d3c5511.jfif') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    letter-spacing: 4px;
+}
+
+.hero-content p {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 6%;
+}
+
+.sobre h2,
+.portfolio h2,
+.trabalhos h2,
+.contato h2 {
+    text-align: center;
+    font-family: 'Montserrat', serif;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* SOBRE */
+.sobre p {
+    font-family: 'Inter', sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* PORTFOLIO */
+
+.pagina-portfolio {
+    padding-top: 140px; 
+    min-height: 100vh;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    grid-auto-flow: dense;
+}
+
+.grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+.grid img.loaded {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* hover suave (SEM quebrar layout) */
+.grid img:hover {
+    transform: scale(1.04);
+}
+
+.grid img.top {
+    object-position: top;
+}
+
+.grid img.center {
+    object-position: center;
+}
+
+.grid img.bottom {
+    object-position: bottom;
+}
+
+/* horizontais */
+.grid img.img-horizontal {
+    grid-column: span 2;
+}
+
+.grid img.img-vertical {
+    grid-row: span 2;
+}
+
+/* destaque sem exagerar */
+.grid img.img-destaque {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.grid img.img-quadrada {
+    aspect-ratio: 1 / 1;
+}
+
+.grid img:last-child,
+.grid img:nth-last-child(2),
+.grid img:nth-last-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* CONTATO */
+.contato-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.contato-item svg,
+.contato-item img {
+    width: 22px;   /* ajuste o tamanho aqui */
+    height: 22px;  /* ajuste o tamanho aqui */
+    object-fit: contain;
+    opacity: 0.8;
+}
+
+.contato-item a {
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.contato-item a:hover {
+    text-decoration: underline;
+}
+
+/* WHATSAPP */
+.link-whatsapp img {
+    width: 70px;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 200;
+    opacity: 0.95;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.link-whatsapp img:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+
+.pagina-sobre {
+    padding-top: 140px; /* espaço para o header */
+    min-height: 100vh;
+}
+
+.sobre-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.sobre-texto h1 {
+    font-family: 'Montserrat', serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.sobre-texto p {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.sobre-imagem img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+/* DROPDOWN PORTFOLIO */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #111;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    min-width: 200px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: #111;
+    font-size: 13px;
+}
+
+.dropdown-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* Mostrar ao passar o mouse */
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: default;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    cursor: default;
+    transform: scale(0.95);
+    transition: transform 0.4s ease;
+}
+
+.lightbox.active img {
+    transform: scale(1);
+}
+
+.lightbox::after {
+    content: "×";
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
+    color: white;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+/* Setas */
+.lightbox .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 48px;
+    cursor: pointer;
+    opacity: .7;
+    transition: opacity .2s ease;
+}
+
+.lightbox .nav:hover {
+    opacity: 1;
+}
+
+.lightbox .prev {
+    left: 30px;
+}
+
+.lightbox .next {
+    right: 30px;
+}
+
+
+@media (max-width: 900px) {
+    .sobre-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .sobre-imagem img {
+        height: 350px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .grid {
+        column-count: 2;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lightbox-arrow {
+        font-size: 36px;
+    }
+
+    .lightbox-arrow.prev {
+        left: 20px;
+    }
+
+    .lightbox-arrow.next {
+        right: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        column-count: 1;
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 520px) {
+    .grid {
+        column-count: 1;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
