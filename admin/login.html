@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Admin</title>
+</head>
+<body>
+
+<h2>Área Administrativa</h2>
+
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+
+<script type="module">
+  import { auth } from "../firebase/firebase.js";
+  import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  window.login = function () {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        window.location.href = "admin.html";
+      })
+      .catch(err => {
+        alert("Erro no login: " + err.message);
+        console.error(err);
+      });
+  };
+</script>
+
+</body>
+</html>
