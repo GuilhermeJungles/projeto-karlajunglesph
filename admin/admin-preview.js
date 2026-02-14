@@ -13,7 +13,7 @@ const basePaths = {
 };
 
 const portfolios = {
-  casamento: window.fotosCasamento,
+  casamento: window.fotosCasamento || [],
   corporativo: window.fotosCorporativo || []
 };
 
@@ -32,7 +32,7 @@ function renderPortfolio(name) {
     card.className = "card";
 
     const img = document.createElement("img");
-    img.src = basePaths[name] + filename;
+    img.src = basePaths[name] + filename;  // Monta caminho completo
     img.alt = "Imagem do portfólio";
 
     card.appendChild(img);
