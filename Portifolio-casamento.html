@@ -51,5 +51,28 @@
     <button class="nav next" aria-label="Próxima imagem">&#10095;</button>
 </div>
 
+<script type="module">
+  import { storage } from "./firebase/firebase.js";
+  import { ref, listAll, getDownloadURL } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+  const galeria = document.getElementById("galeria");
+
+  listAll(ref(storage, "fotos"))
+    .then(res => {
+      res.items.forEach(item => {
+        getDownloadURL(item).then(url => {
+          const img = document.createElement("img");
+          img.src = url;
+          img.classList.add("foto");
+          galeria.appendChild(img);
+        });
+      });
+    })
+    .catch(err => {
+      console.log("Nenhuma foto no Firebase ainda", err.message);
+    });
+</script>
+
 </body>
 </html>

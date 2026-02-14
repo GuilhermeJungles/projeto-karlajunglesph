@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin • Galeria</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<script>
+  if (sessionStorage.getItem("adminAuth") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<header>
+  Painel Administrativo — Galeria
+</header>
+
+<div class="container">
+
+  <div class="upload-box">
+    <input type="file" id="file" accept="image/*">
+    <button onclick="upload()">Upload</button>
+  </div>
+
+  <div class="grid" id="lista"></div>
+
+</div>
+
+<script type="module">
+  import { auth, storage } from "../firebase/firebase.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import {
+    ref,
+    uploadBytes,
+    listAll,
+    getDownloadURL,
+    deleteObject
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+  onAuthStateChanged(auth, user => {
+    if (!user) location.href = "login.html";
+    carregarFotos();
+  });
+
+  function upload() {
+    const fileInput = document.getElementById("file");
+    const file = fileInput.files[0];
+    if (!file) return alert("Selecione uma imagem");
+
+    const storageRef = ref(storage, `fotos/${Date.now()}_${file.name}`);
+
+    uploadBytes(storageRef, file)
+      .then(() => {
+        fileInput.value = "";
+        carregarFotos();
+      });
+  }
+
+  function carregarFotos() {
+    const listRef = ref(storage, "fotos");
+    lista.innerHTML = "";
+
+    listAll(listRef).then(res => {
+      res.items.forEach(item => {
+        getDownloadURL(item).then(url => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${url}">
+            <button onclick="deletar('${item.fullPath}')">Excluir</button>
+          `;
+          lista.appendChild(card);
+        });
+      });
+    });
+  }
+
+  function deletar(path) {
+    if (!confirm("Excluir esta foto?")) return;
+    deleteObject(ref(storage, path)).then(carregarFotos);
+  }
+
+  window.upload = upload;
+  window.deletar = deletar;
+</script>
+
+<!-- MENU DE PORTFÓLIOS -->
+<div class="portfolio-menu">
+  <button data-portfolio="casamento">Casamento</button>
+  <button data-portfolio="corporativo">Corporativo</button>
+</div>
+
+<!--CAMINHO DAS IMG-->
+<script src="../fotos-casamento-wedd.js"></script>
+<script src="../fotos-corporativos.js"></script>
+
+<!-- PREVIEW -->
+<div id="portfolioPreview" class="grid"></div>
+
+<button id="logout" class="logout-btn">Sair do painel</button>
+
+<script>
+  document.getElementById("logout").addEventListener("click", () => {
+    sessionStorage.removeItem("adminAuth");
+    window.location.href = "login.html";
+  });
+</script>
+
+<script src="admin-preview.js"></script>
+</body>
+</html>

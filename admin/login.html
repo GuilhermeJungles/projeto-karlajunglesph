@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/2127-155244168_medium.mp4" type="video/mp4" />
+  </video>
+
+  <div class="overlay"></div>
+
+  <main class="login-container">
+    <h1>Admin</h1>
+    <p>Área restrita</p>
+
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="E-mail" required />
+      <input type="password" id="senha" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+
+    <span class="error" id="errorMsg"></span>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
