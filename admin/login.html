@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Admin</title>
+  <meta charset="UTF-8" />
+  <title>Admin | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
 
-<h2>Área Administrativa</h2>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="assets/2127-155244168_medium.mp4" type="video/mp4" />
+  </video>
 
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Senha">
-<button onclick="login()">Entrar</button>
+  <div class="overlay"></div>
 
-<script type="module">
-  import { auth } from "../firebase/firebase.js";
-  import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  <main class="login-container">
+    <h1>Admin</h1>
+    <p>Área restrita</p>
 
-  window.login = function () {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    <form id="loginForm">
+      <input type="email" placeholder="E-mail" required />
+      <input type="password" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        window.location.href = "admin.html";
-      })
-      .catch(err => {
-        alert("Erro no login: " + err.message);
-        console.error(err);
-      });
-  };
-</script>
+    <span class="error" id="errorMsg"></span>
+  </main>
 
+  <script src="admin.js"></script>
 </body>
 </html>
