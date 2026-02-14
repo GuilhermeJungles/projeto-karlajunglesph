@@ -33,8 +33,9 @@ header {
   align-items: center;
 }
 
-.upload-box input {
+.upload-box input[type="file"] {
   flex: 1;
+  cursor: pointer;
 }
 
 button {
@@ -48,7 +49,11 @@ button {
 }
 
 button:hover {
-  opacity: 0.8;
+    background: #f8f8f8;
+    opacity: 1;
+    transition: 0.8s ease-in-out;
+    color: #161616;
+    font-size: 15px;
 }
 
 .grid {
@@ -103,3 +108,24 @@ button:hover {
   transform: translateX(-50%) scale(1.05);
 }
 
+/*-------------------------------------------------------------*/
+
+.portfolio-menu {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.portfolio-menu button {
+  background: #222;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.portfolio-menu button.active {
+  background: #e63946;
+}
