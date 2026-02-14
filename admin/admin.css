@@ -4,9 +4,9 @@
 }
 
 body {
-  margin: 0;
-  background: #0f0f0f;
-  color: #fff;
+  background: #0e0e0e;
+  color: #f5f5f5;
+  font-family: "Inter", sans-serif;
 }
 
 header {
@@ -76,3 +76,30 @@ button:hover {
   right: 10px;
   background: rgba(0,0,0,0.7);
 }
+
+.logout-btn {
+  position: fixed;
+  bottom: 40px;              /* não fica colado no fim */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-50%) scale(1.05);
+}
+
