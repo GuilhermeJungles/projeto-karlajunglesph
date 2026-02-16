@@ -8,7 +8,7 @@ const buttons = document.querySelectorAll(".portfolio-menu button");
   Depois vamos trocar por Firebase / Cloudinary
 */
 const basePaths = {
-  casamento: "../img/CASAMENTO-PRE WEDDING/",
+  casamento: "../img/casamento-pre-wedding/",
   corporativo: "../img/CORPORATIVO-POSICIONAMENTO/",
 };
 
@@ -51,3 +51,9 @@ buttons.forEach(btn => {
   });
 });
 
+function salvarOrdem(portfolioKey, fotos) {
+  localStorage.setItem(
+    `portfolio-${portfolioKey}`,
+    JSON.stringify(fotos)
+  );
+}
