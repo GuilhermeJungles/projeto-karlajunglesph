@@ -1,13 +1,13 @@
-const grid = document.querySelector('.grid');
-if (!grid) return;
+document.querySelectorAll(".grid").forEach(grid => {
+  const pasta = grid.dataset.pasta;
+  const key = grid.dataset.portfolio; // 👈 AQUI
 
-const pasta = grid.dataset.pasta;
-const key = grid.dataset.portfolio;
+  const fotos = window.PORTFOLIOS[key];
+  if (!fotos) return;
 
-const fotos = window.PORTFOLIOS[key];
-
-fotos.forEach(nome => {
-  const img = document.createElement('img');
-  img.src = `${pasta}/${nome}`;
-  grid.appendChild(img);
+  fotos.forEach(img => {
+    const image = document.createElement("img");
+    image.src = `${pasta}/${img}`;
+    grid.appendChild(image);
+  });
 });
