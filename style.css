@@ -43,7 +43,14 @@ header.header {
 .navbar {
     display: flex;
     justify-content: center;
-    padding: 20px 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    transition: padding 0.3s ease, background 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .navbar a {
@@ -89,6 +96,11 @@ header.header {
 }
 
 /* SECTIONS */
+main.pagina-portfolio {
+  margin: 0;
+  padding: 0 6%;
+}
+
 section {
     padding: 80px 6%;
 }
@@ -391,7 +403,7 @@ section {
 .portfolio-section {
   width: 100%;
   margin-top: 0;
-  padding-top: 0;
+  padding-top: 80px;
   background: #f6f6f6;
   border-radius: 12px;
 }
