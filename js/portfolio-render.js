@@ -1,13 +1,20 @@
-document.querySelectorAll(".grid").forEach(grid => {
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".grid");
+  if (!grid) return;
+
+  const key = grid.dataset.portfolio;
   const pasta = grid.dataset.pasta;
-  const key = grid.dataset.portfolio; // 👈 AQUI
 
-  const fotos = window.PORTFOLIOS[key];
-  if (!fotos) return;
+const fotos = getPortfolio(key);
 
-  fotos.forEach(img => {
-    const image = document.createElement("img");
-    image.src = `${pasta}/${img}`;
-    grid.appendChild(image);
+  if (!Array.isArray(fotos)) {
+    console.error("Portfólio inválido:", key);
+    return;
+  }
+
+  fotos.forEach(nome => {
+    const img = document.createElement("img");
+    img.src = `${pasta}/${nome}`;
+    grid.appendChild(img);
   });
 });

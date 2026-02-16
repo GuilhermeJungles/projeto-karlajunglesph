@@ -52,8 +52,14 @@ buttons.forEach(btn => {
 });
 
 function salvarOrdem(portfolioKey, fotos) {
+  // garante formato
+  const seguro = fotos.map((f, i) => ({
+    id: f.id || String(i),
+    src: f.src || f
+  }));
+
   localStorage.setItem(
     `portfolio-${portfolioKey}`,
-    JSON.stringify(fotos)
+    JSON.stringify(seguro)
   );
 }
