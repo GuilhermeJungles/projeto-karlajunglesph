@@ -24,6 +24,10 @@ function renderPortfolio(name) {
     card.draggable = true;
 
     const img = document.createElement("img");
+    img.loading = "lazy";      
+    img.decoding = "async";
+    img.draggable = false;
+
     img.src = basePaths[name] + filename;
     img.alt = "Imagem do portfólio";
 
