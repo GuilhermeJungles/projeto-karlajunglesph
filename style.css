@@ -59,12 +59,13 @@ header::before {
     justify-content: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    gap: 20px;
     transition: padding 0.3s ease, background 0.3s ease;
 }
 
 .navbar.scrolled {
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .navbar a {
@@ -83,6 +84,9 @@ header::before {
     position: relative;
 }
 
+.navbar.scrolled a, button, img {
+    padding-top: 5px;
+}
 .navbar a:hover {
     opacity: 0.6;
     color: #ffffff;
@@ -114,6 +118,15 @@ header::before {
 .navbar a:hover::after,
 .dropdown-btn:hover::after {
     width: 100%;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    align-items: center;
+    margin-left: 30%;
+    margin-right: 30%;
 }
 
 /* HERO */
