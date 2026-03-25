@@ -258,6 +258,87 @@ section {
     grid-row: span 1;
 }
 
+.portfolio-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.card-leque {
+    text-decoration: none;
+    color: var(--text-main);
+    text-align: center;
+}
+
+.stack {
+    position: relative;
+    width: 260px;
+    height: 360px;
+}
+
+.stack img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    transition: all 0.4s ease;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.back1 {
+  transform: rotate(-6deg) translateX(-10px);
+  filter: blur(2px);
+  opacity: 0.6;
+}
+
+.back2 {
+  transform: rotate(6deg) translateX(10px);
+  filter: blur(2px);
+  opacity: 0.6;
+}
+
+.front {
+  z-index: 2;
+}
+
+.card-leque:hover .front {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.card-leque:hover .back1 {
+  transform: rotate(-10deg) translateX(-20px);
+  filter: blur(1px);
+}
+
+.card-leque:hover .back2 {
+  transform: rotate(10deg) translateX(20px);
+  filter: blur(1px);
+}
+
+.card-leque span {
+  display: block;
+  margin-top: 15px;
+
+  font-style: italic;
+  letter-spacing: 1px;
+
+  transition: all 0.3s ease;
+}
+
+.card-leque:hover span {
+  color: var(--text-hover);
+
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.4),
+    0 0 12px rgba(199,168,108,0.5);
+}
+
 /* CONTATO */
 .contato-item {
     display: flex;
