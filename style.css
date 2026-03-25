@@ -259,11 +259,20 @@ section {
 }
 
 .portfolio-cards {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+
+  justify-items: center;
+  
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.portfolio-cards .card-leque:nth-child(5) {
+  grid-column: 1 / -1; /* ocupa as duas colunas */
+  justify-self: center;
 }
 
 .card-leque {
