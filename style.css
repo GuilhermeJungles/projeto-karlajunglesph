@@ -283,6 +283,7 @@ section {
 
 .stack {
     position: relative;
+    align-items: center;
     width: 260px;
     height: 360px;
 }
