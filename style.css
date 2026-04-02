@@ -81,10 +81,9 @@ header::before {
     font-size: 14px;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    display: inline-block;
+    padding: 10px 0;
+    display: block;
     position: relative;
-    padding: 0;
-    line-height: 1;
 }
 
 .navbar.scrolled a, button, img {
@@ -97,15 +96,15 @@ header::before {
         0 0 8px rgba(199,168,108,0.4);
 }
 
-.navbar a::after,
-.dropdown-btn::after {
+.navbar a::after {
     content: "";
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -2px;
+    left: 0;
+    bottom: 6px;
+
     width: 0%;
     height: 2px;
+
     background: #c7a86c;
     transition: width 0.3s ease;
 }
@@ -455,10 +454,24 @@ section {
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    color: #eaeaea;
+    color: #5a4a42;
     display: inline-block;
     /* 👈 ISSO resolve o desalinhamento */
     position: relative;
+}
+
+.dropdown-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+
+    width: 0%;
+    height: 2px;
+
+    background: var(--accent-gold);
+
+    transition: width 0.3s ease;
 }
 
 .dropdown-menu {
