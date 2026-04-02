@@ -1,6 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================
+       SCROLL EFFECT (HEADER & NAVBAR)
+    ========================= */
+    const header = document.querySelector('.header');
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            if (header) header.classList.add('scroll');
+            if (navbar) navbar.classList.add('scrolled');
+        } else {
+            if (header) header.classList.remove('scroll');
+            if (navbar) navbar.classList.remove('scrolled');
+        }
+    });
+
+    /* =========================
        LAZY LOAD
     ========================= */
     const observer = new IntersectionObserver((entries, obs) => {
@@ -60,86 +76,51 @@ document.addEventListener("DOMContentLoaded", () => {
        LIGHTBOX
     ========================= */
     const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector("img");
-    const prevBtn = lightbox.querySelector(".prev");
-    const nextBtn = lightbox.querySelector(".next");
+    if (lightbox) {
+        const lightboxImg = lightbox.querySelector("img");
+        const prevBtn = lightbox.querySelector(".prev");
+        const nextBtn = lightbox.querySelector(".next");
 
-    function abrirLightbox(index) {
-        indexAtual = index;
+        function abrirLightbox(index) {
+            indexAtual = index;
+            const img = imagens[indexAtual];
 
-        const img = imagens[indexAtual];
+            if (!img.src || img.src === "") {
+                img.src = img.dataset.src;
+            }
 
-        // ✅ CORREÇÃO PRINCIPAL
-        // força carregar a imagem se ainda estiver lazy
-        if (!img.src || img.src === "") {
-            img.src = img.dataset.src;
+            lightboxImg.src = img.src;
+            lightbox.classList.add("active");
         }
 
-        lightboxImg.src = img.src;
-        lightbox.classList.add("active");
-    }
-
-    function fecharLightbox() {
-        lightbox.classList.remove("active");
-    }
-
-    function proxima() {
-        indexAtual = (indexAtual + 1) % imagens.length;
-        const img = imagens[indexAtual];
-
-        if (!img.src || img.src === "") {
-            img.src = img.dataset.src;
+        function fecharLightbox() {
+            lightbox.classList.remove("active");
         }
 
-        lightboxImg.src = img.src;
-    }
-
-    function anterior() {
-        indexAtual = (indexAtual - 1 + imagens.length) % imagens.length;
-        const img = imagens[indexAtual];
-
-        if (!img.src || img.src === "") {
-            img.src = img.dataset.src;
+        function proxima() {
+            indexAtual = (indexAtual + 1) % imagens.length;
+            const img = imagens[indexAtual];
+            if (!img.src || img.src === "") img.src = img.dataset.src;
+            lightboxImg.src = img.src;
         }
 
-        lightboxImg.src = img.src;
+        function anterior() {
+            indexAtual = (indexAtual - 1 + imagens.length) % imagens.length;
+            const img = imagens[indexAtual];
+            if (!img.src || img.src === "") img.src = img.dataset.src;
+            lightboxImg.src = img.src;
+        }
+
+        if (nextBtn) nextBtn.addEventListener("click", e => { e.stopPropagation(); proxima(); });
+        if (prevBtn) prevBtn.addEventListener("click", e => { e.stopPropagation(); anterior(); });
+
+        lightbox.addEventListener("click", fecharLightbox);
+
+        document.addEventListener("keydown", e => {
+            if (!lightbox.classList.contains("active")) return;
+            if (e.key === "Escape") fecharLightbox();
+            if (e.key === "ArrowRight") proxima();
+            if (e.key === "ArrowLeft") anterior();
+        });
     }
-
-    /* =========================
-       CONTROLES
-    ========================= */
-    nextBtn.addEventListener("click", e => {
-        e.stopPropagation();
-        proxima();
-    });
-
-    prevBtn.addEventListener("click", e => {
-        e.stopPropagation();
-        anterior();
-    });
-
-    lightbox.addEventListener("click", fecharLightbox);
-
-    document.addEventListener("keydown", e => {
-        if (!lightbox.classList.contains("active")) return;
-
-        if (e.key === "Escape") fecharLightbox();
-        if (e.key === "ArrowRight") proxima();
-        if (e.key === "ArrowLeft") anterior();
-    });
-
-});
-
-/* =========================
-       ROLAR O SCROLL DIMINUIR O HEADER
-    ========================= */
-
-    const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
 });
