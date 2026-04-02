@@ -17,6 +17,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================
+       DROPDOWN MENU CONTROL
+    ========================= */
+    const dropdowns = document.querySelectorAll('.dropdown');
+    let dropdownTimeout;
+
+    dropdowns.forEach(dropdown => {
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const btn = dropdown.querySelector('.dropdown-btn');
+
+        if (!menu || !btn) return;
+
+        // Manter menu aberto ao passar o mouse
+        dropdown.addEventListener('mouseenter', () => {
+            clearTimeout(dropdownTimeout);
+            menu.style.display = 'flex';
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+            dropdownTimeout = setTimeout(() => {
+                menu.style.display = 'none';
+                menu.style.opacity = '0';
+                menu.style.visibility = 'hidden';
+            }, 150);
+        });
+
+        // Manter menu aberto ao passar o mouse sobre o menu
+        menu.addEventListener('mouseenter', () => {
+            clearTimeout(dropdownTimeout);
+            menu.style.display = 'flex';
+            menu.style.opacity = '1';
+            menu.style.visibility = 'visible';
+        });
+
+        menu.addEventListener('mouseleave', () => {
+            dropdownTimeout = setTimeout(() => {
+                menu.style.display = 'none';
+                menu.style.opacity = '0';
+                menu.style.visibility = 'hidden';
+            }, 150);
+        });
+
+        // Fechar ao clicar em um link
+        const links = menu.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.style.display = 'none';
+                menu.style.opacity = '0';
+                menu.style.visibility = 'hidden';
+            });
+        });
+    });
+
+    /* =========================
        LAZY LOAD
     ========================= */
     const observer = new IntersectionObserver((entries, obs) => {

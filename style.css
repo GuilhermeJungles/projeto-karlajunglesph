@@ -55,18 +55,56 @@ header.header {
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 35px 0;
-    gap: 40px;
+    justify-content: space-between;
+    padding: 35px 60px;
     transition: all 0.4s ease;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
 .navbar.scrolled {
-    padding: 15px 0;
+    padding: 15px 60px;
 }
 
+/* GRUPOS DE NAVEGAÇÃO */
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-left {
+    flex: 0 0 auto;
+}
+
+.nav-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* LOGO CENTRALIZADA */
+.logo-link {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+.navbar.scrolled .logo {
+    width: 60px;
+}
+
+/* LINKS E BOTÕES */
 .navbar a, .dropdown-btn {
     text-decoration: none;
     font-weight: 500;
@@ -81,6 +119,7 @@ header.header {
     border: none;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
 }
 
 .navbar a:hover, .dropdown-btn:hover {
@@ -104,27 +143,28 @@ header.header {
     width: 100%;
 }
 
-.logo {
-    width: 60px;
-    height: auto;
-    transition: all 0.4s ease;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
-}
-
-.navbar.scrolled .logo {
-    width: 45px;
-}
-
 /* DROPDOWN */
 .dropdown {
     position: relative;
+}
+
+/* Área invisível para manter o menu aberto */
+.dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 15px;
+    pointer-events: auto;
 }
 
 .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%) translateY(0px);
     background: var(--white);
     box-shadow: 0 10px 30px rgba(90, 74, 66, 0.15);
     border-radius: 4px;
@@ -135,8 +175,17 @@ header.header {
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     border-top: 2px solid var(--accent-gold);
+    margin-top: -2px;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -155,6 +204,7 @@ header.header {
     color: var(--text-main);
     text-align: left;
     width: 100%;
+    transition: all 0.2s ease;
 }
 
 .dropdown-menu a::after {
@@ -174,6 +224,7 @@ header.header {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 0;
 }
 
 .hero-content {
@@ -186,6 +237,7 @@ header.header {
     font-size: 5rem;
     letter-spacing: 8px;
     margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .hero-content p {
@@ -200,11 +252,16 @@ section {
     padding: 100px 0;
 }
 
+.trabalhos, .contato {
+    max-width: 100%;
+}
+
 .trabalhos h2, .contato h2, .sobre h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
     color: var(--text-main);
+    font-weight: 400;
 }
 
 /* PORTFOLIO CARDS (Home) */
@@ -254,6 +311,7 @@ section {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     font-style: italic;
+    font-weight: 400;
 }
 
 /* GRID PORTFOLIO (Páginas Internas) */
@@ -284,6 +342,10 @@ section {
 }
 
 /* CONTATO */
+.contato {
+    text-align: center;
+}
+
 .contato-item {
     display: flex;
     justify-content: center;
@@ -345,19 +407,97 @@ section {
 }
 
 /* RESPONSIVO */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 30px 40px;
+    }
+    
+    .navbar.scrolled {
+        padding: 12px 40px;
+    }
+    
+    .nav-group {
+        gap: 25px;
+    }
+    
+    .nav-right {
+        gap: 25px;
+    }
+    
+    .logo {
+        width: 70px;
+    }
+    
+    .navbar.scrolled .logo {
+        width: 50px;
+    }
+}
+
 @media (max-width: 1024px) {
-    .navbar { gap: 20px; }
+    .navbar { gap: 20px; padding: 25px 30px; }
+    .navbar.scrolled { padding: 10px 30px; }
+    .nav-group { gap: 20px; }
+    .nav-right { gap: 20px; }
     .grid { column-count: 2; }
+    .logo { width: 60px; }
+    .navbar.scrolled .logo { width: 45px; }
 }
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 20px;
-        justify-content: space-between;
+        padding: 20px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    .navbar a:not(.logo-link), .dropdown {
-        display: none; /* Aqui precisaria de um menu hambúrguer para mobile real */
+    
+    .navbar.scrolled {
+        padding: 10px 20px;
     }
+    
+    .nav-group {
+        gap: 15px;
+        font-size: 12px;
+    }
+    
+    .nav-right {
+        gap: 15px;
+    }
+    
+    .logo {
+        width: 50px;
+        order: -1;
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+    }
+    
+    .navbar.scrolled .logo {
+        width: 40px;
+    }
+    
     .grid { column-count: 1; }
     .hero-content h1 { font-size: 3rem; }
+    .portfolio-cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 15px 10px;
+    }
+    
+    .navbar a, .dropdown-btn {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+    
+    .nav-group {
+        gap: 10px;
+    }
+    
+    .nav-right {
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
+    }
 }
