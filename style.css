@@ -63,13 +63,23 @@ header.header {
 }
 
 .navbar.scrolled {
-    padding: 15px 60px;
+    padding: 8px 60px;
 }
 
 /* GRUPOS DE NAVEGAÇÃO */
 .nav-group {
     display: flex;
     align-items: center;
+    gap: 40px;
+    transition: gap 0.3s ease;
+}
+
+.navbar.scrolled .nav-group:not(.dropdown) {
+    gap: 25px;
+}
+
+/* Manter o dropdown com o gap original */
+.navbar.scrolled .dropdown {
     gap: 40px;
 }
 
@@ -101,7 +111,7 @@ header.header {
 }
 
 .navbar.scrolled .logo {
-    width: 60px;
+    width: 50px;
 }
 
 /* LINKS E BOTÕES */
@@ -120,6 +130,12 @@ header.header {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
+}
+
+.navbar.scrolled > .nav-group > a, .navbar.scrolled .dropdown-btn {
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 5px 0;
 }
 
 .navbar a:hover, .dropdown-btn:hover {
@@ -339,6 +355,78 @@ section {
 .grid img:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Estilos para Portfólio com Container */
+.pagina-portfolio {
+    background: #F9F7F4;
+    min-height: calc(100vh - 200px);
+    padding-top: 130px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pagina-portfolio > h1 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    padding: 0 20px;
+}
+
+.portfolio-grid-wrapper {
+    background: transparent;
+    border-radius: 0;
+    padding: 0 20px 60px 20px;
+    margin-top: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolio-section {
+    background: #F9F7F4;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.portfolio-inner {
+    padding: 40px 40px 80px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-header {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.portfolio-header h1 {
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    font-family: 'Playfair Display', serif;
+}
+
+.portfolio-header p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    font-family: 'Inter', sans-serif;
 }
 
 /* CONTATO */

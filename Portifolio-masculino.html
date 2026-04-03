@@ -3,53 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;600&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
-    <title>Ensaio Masculino</title>
-    <link rel="stylesheet" href="../style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <title>Ensaio Masculino — Karla Jungles</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="header">
     <nav class="navbar">
-        <a href="../index.html">Início</a>
-        <a href="../sobre.html">Sobre</a>
-
-        <div class="dropdown">
-            <button class="dropdown-btn">Portifólio +</button>
-            <div class="dropdown-menu">
-                <a href="Portifolio-feminino.html">Ensaio Feminino</a>
-                <a href="Coorp-posicionamento.html">Corporativo - Posicionamento</a>
-                <a href="Portifolio-casamento.html">Casamento/Pré Wedding</a>
-                <a href="Portifolio-eventos.html">Eventos</a>
-                <a href="Portifolio-masculino.html">Ensaio Masculino</a>
-            </div>
+        <!-- GRUPO ESQUERDO -->
+        <div class="nav-group nav-left">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
         </div>
 
-        <a href="../index.html#contato">Contato</a>
+        <!-- LOGO CENTRALIZADA -->
+        <a href="index.html" class="logo-link">
+            <img src="./img/A485b1daf3bb04f5197dfeebee52896b6n.png" alt="Karla Jungles Logo" class="logo">
+        </a>
+
+        <!-- GRUPO DIREITO -->
+        <div class="nav-group nav-right">
+            <div class="dropdown">
+                <button class="dropdown-btn">Portfólio</button>
+                <div class="dropdown-menu">
+                    <a href="Portifolio-feminino.html">Ensaio Feminino</a>
+                    <a href="Coorp-posicionamento.html">Corporativo & Posicionamento</a>
+                    <a href="Portifolio-casamento.html">Casamentos & Pré Wedding</a>
+                    <a href="Portifolio-eventos.html">Eventos</a>
+                    <a href="Portifolio-masculino.html">Ensaio Masculino</a>
+                </div>
+            </div>
+            <a href="index.html#contato">Contato</a>
+        </div>
     </nav>
 </header>
 
 <main class="pagina-portfolio">
     <h1>Ensaio Masculino</h1>
 
-    <div class="grid">
-        <img src="../img/corporativo/1.jpg" alt="">
-        <img src="../img/corporativo/2.jpg" alt="">
-        <img src="../img/corporativo/3.jpg" alt="">
+    <div class="portfolio-grid-wrapper">
+        <div class="grid">
+            <img src="./img/corporativo/1.jpg" alt="">
+            <img src="./img/corporativo/2.jpg" alt="">
+            <img src="./img/corporativo/3.jpg" alt="">
+        </div>
     </div>
 </main>
 
-<script src="../script.js"></script>
-
 <div class="lightbox" id="lightbox">
     <button class="nav prev" aria-label="Imagem anterior">&#10094;</button>
-
     <img src="" alt="Imagem ampliada">
-
     <button class="nav next" aria-label="Próxima imagem">&#10095;</button>
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
