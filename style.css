@@ -235,12 +235,12 @@ header.header {
 
 /* HERO */
 .hero {
-    height: 100vh;
-    background: url('./img/1cc855e5-a5ad-4083-84c8-be638d3c5511.jfif') center/cover no-repeat;
+    height: calc(100vh - 90px);
+    background: url('./img/casamento-pre-wedding/NICOLE_ANDRE-9.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0;
+    margin-top: 165px;
 }
 
 .hero-content {
@@ -381,7 +381,7 @@ section {
 .portfolio-grid-wrapper {
     background: transparent;
     border-radius: 0;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 60px 20px;
     margin-top: 20px;
     max-width: 1400px;
     margin-left: auto;
@@ -522,7 +522,8 @@ section {
     align-items: center;
     justify-content: center;
     margin-top: 100px;
-    padding-top: 20px;
+    padding-top: 80px;
+    border-top: 1px solid rgba(90, 74, 66, 0.1);
 }
 
 .portfolio-contact-section h2 {
@@ -535,29 +536,27 @@ section {
 
 .btn-whatsapp {
     display: inline-block;
-    padding: 20px 50px;
+    padding: 16px 50px;
     background: #E8DCC8;
     color: #5a4a42;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 1px;
-    border-radius: 15px;
+    border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(90, 74, 66, 0.12);
+    box-shadow: 0 6px 16px rgba(90, 74, 66, 0.12);
     margin-bottom: 60px;
     border: 2px solid #E8DCC8;
-    
 }
 
 .btn-whatsapp:hover {
-    background: rgba(253, 248, 242, 0.95);
+    background: rgba(255, 255, 255, 0.85);
     color: #5a4a42;
     transform: translateY(-2px);
-    box-shadow: 0 25px 25px rgba(90, 74, 66, 0.15);
-    transition: all 0.3s ease;
-    border-top: 5px solid var(--accent-gold);
+    box-shadow: 0 10px 25px rgba(90, 74, 66, 0.15);
+    border-color: rgba(255, 255, 255, 0.95);
 }
 
 .portfolio-contact-links {
