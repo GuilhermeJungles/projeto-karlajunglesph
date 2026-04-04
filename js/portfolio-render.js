@@ -4,14 +4,18 @@ document.querySelectorAll(".grid").forEach(grid => {
 
   const fotos = window.getPortfolio(key);
 
-  if (!fotos || !fotos.length) return;
+  if (!fotos) return;
 
   grid.innerHTML = "";
 
   fotos.forEach(nome => {
+
     const img = document.createElement("img");
+
     img.src = `${pasta}/${nome}`;
     img.loading = "lazy";
     grid.appendChild(img);
+
   });
 });
+

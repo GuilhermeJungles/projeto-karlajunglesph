@@ -5,9 +5,17 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-header: #FDF8F2; /* Bege clarinho/nude para leveza */
+    --text-main: #5a4a42; /* Marrom suave para contraste elegante */
+    --text-hover: #8d7366; /* Marrom um pouco mais claro no hover */
+    --accent-gold: #c7a86c; /* Dourado para detalhes */
+    --white: #ffffff;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
-    color: #111;
+    color: #333;
     background: #fff;
     scroll-behavior: smooth;
 }
@@ -18,7 +26,9 @@ span {
     font-family: "Inter", sans-serif;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Playfair Display', serif;
 }
 
@@ -29,490 +39,690 @@ header.header {
     top: 0;
     margin: 0;
     padding: 0;
-    z-index: 100;
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    transition: padding 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+    background: var(--bg-header);
+    box-shadow: 0 2px 15px rgba(90, 74, 66, 0.08);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header.scroll {
-    padding: 8px 0;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 5px 0;
+    background: rgba(253, 248, 242, 0.95);
+    box-shadow: 0 4px 20px rgba(90, 74, 66, 0.12);
 }
 
 .navbar {
     display: flex;
-    justify-content: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    transition: padding 0.3s ease, background 0.3s ease;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px 60px;
+    transition: all 0.4s ease;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .navbar.scrolled {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    padding: 8px 60px;
 }
 
-.navbar a {
-    margin: 0 20px;
+/* GRUPOS DE NAVEGAÇÃO */
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    transition: gap 0.3s ease;
+}
+
+.navbar.scrolled .nav-group:not(.dropdown) {
+    gap: 25px;
+}
+
+/* Manter o dropdown com o gap original */
+.navbar.scrolled .dropdown {
+    gap: 40px;
+}
+
+.nav-left {
+    flex: 0 0 auto;
+}
+
+.nav-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* LOGO CENTRALIZADA */
+.logo-link {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+.navbar.scrolled .logo {
+    width: 50px;
+}
+
+/* LINKS E BOTÕES */
+.navbar a, .dropdown-btn {
     text-decoration: none;
-    font-weight: 600;
-    color: #111;
+    font-weight: 500;
+    color: var(--text-main);
     text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
 }
 
-.navbar a:hover {
-    opacity: 0.6;
+.navbar.scrolled > .nav-group > a, .navbar.scrolled .dropdown-btn {
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 5px 0;
+}
+
+.navbar a:hover, .dropdown-btn:hover {
+    color: var(--accent-gold);
+}
+
+/* Linha decorativa no hover */
+.navbar a::after, .dropdown-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar a:hover::after, .dropdown-btn:hover::after {
+    width: 100%;
+}
+
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+}
+
+/* Área invisível para manter o menu aberto */
+.dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 15px;
+    pointer-events: auto;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(0px);
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(90, 74, 66, 0.15);
+    border-radius: 4px;
+    padding: 15px 0;
+    min-width: 240px;
+    display: none;
+    flex-direction: column;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    border-top: 2px solid var(--accent-gold);
+    margin-top: -2px;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu a {
+    padding: 12px 25px;
+    text-transform: none;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    color: var(--text-main);
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a::after {
+    display: none;
+}
+
+.dropdown-menu a:hover {
+    background: var(--bg-header);
+    color: var(--accent-gold);
+    padding-left: 30px;
 }
 
 /* HERO */
 .hero {
-    height: 100vh;
-    padding-top: 80px;
-    background: url('./img/1cc855e5-a5ad-4083-84c8-be638d3c5511.jfif') center/cover no-repeat;
+    height: calc(100vh - 90px);
+    background: url('./img/casamento-pre-wedding/NICOLE_ANDRE-9.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 165px;
 }
 
 .hero-content {
     text-align: center;
     color: #fff;
-    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    letter-spacing: 4px;
+    font-size: 5rem;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .hero-content p {
-    margin-top: 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
     font-weight: 300;
 }
 
 /* SECTIONS */
-main.pagina-portfolio {
-  margin: 0;
-  padding: 0 6%;
-}
-
 section {
-    padding: 80px 0;
+    padding: 100px 0;
 }
 
-.sobre h2,
-.dropdown-btn h2,
-.trabalhos h2,
-.contato h2 {
+.trabalhos, .contato {
+    max-width: 100%;
+}
+
+.trabalhos h2, .contato h2, .sobre h2 {
     text-align: center;
-    font-family: 'Montserrat', serif;
-    font-size: 2rem;
-    margin-bottom: 30px;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: var(--text-main);
+    font-weight: 400;
 }
 
-/* SOBRE */
-.sobre p {
-    font-family: 'Inter', sans-serif;
-    max-width: 600px;
+/* PORTFOLIO CARDS (Home) */
+.portfolio-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
     margin: 0 auto;
-    line-height: 1.6;
-    text-align: center;
+    padding: 0 20px;
 }
 
-/* PORTFOLIO */
+.card-leque {
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.4s ease;
+}
 
+.stack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    margin-bottom: 20px;
+}
+
+.stack img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.back1 { transform: rotate(-3deg); z-index: 1; }
+.back2 { transform: rotate(3deg); z-index: 2; }
+.back3 { z-index: 3; }
+
+.card-leque:hover .back1 { transform: rotate(-8deg) translateX(-15px); }
+.card-leque:hover .back2 { transform: rotate(8deg) translateX(15px); }
+.card-leque:hover .back3 { transform: translateY(-10px); }
+
+.card-leque span {
+    display: block;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* GRID PORTFOLIO (Páginas Internas) */
 .pagina-portfolio {
-    padding-top: 140px; 
-    min-height: 100vh;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-top: 180px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .grid {
     column-count: 3;
-    column-gap: 12px;
+    column-gap: 20px;
 }
 
 .grid img {
     width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    transition: all 0.4s ease;
     cursor: pointer;
-    break-inside: avoid;
 }
 
-.grid img.loaded {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-}
-
-/* hover suave (SEM quebrar layout) */
 .grid img:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-.grid img.top {
-    object-position: top;
+/* Estilos para Portfólio com Container */
+.pagina-portfolio {
+    background: #F9F7F4;
+    min-height: calc(100vh - 200px);
+    padding-top: 130px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
-.grid img.center {
-    object-position: center;
+.pagina-portfolio > h1 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    padding: 0 20px;
 }
 
-.grid img.bottom {
-    object-position: bottom;
+.portfolio-grid-wrapper {
+    background: transparent;
+    border-radius: 0;
+    padding: 0 20px 60px 20px;
+    margin-top: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* horizontais */
-.grid img.img-horizontal {
-    grid-column: span 2;
-}
-
-.grid img.img-vertical {
-    grid-row: span 2;
-}
-
-/* destaque sem exagerar */
-.grid img.img-destaque {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.grid img.img-quadrada {
-    aspect-ratio: 1 / 1;
-}
-
-.grid img:last-child,
-.grid img:nth-last-child(2),
-.grid img:nth-last-child(3) {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-/* CONTATO */
-.contato-item {
+.portfolio-section {
+    background: #F9F7F4;
+    min-height: calc(100vh - 200px);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin: 14px 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-.contato-item svg,
-.contato-item img {
-    width: 22px;   /* ajuste o tamanho aqui */
-    height: 22px;  /* ajuste o tamanho aqui */
-    object-fit: contain;
-    opacity: 0.8;
+.portfolio-inner {
+    padding: 40px 40px 80px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.contato-item a {
-    color: #111;
-    text-decoration: none;
-    font-weight: 600;
+.portfolio-header {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.portfolio-header h1 {
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: -0.015em;
+    color: var(--text-main);
+    font-family: 'Playfair Display', serif;
+}
+
+.portfolio-header p {
     font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    font-family: 'Inter', sans-serif;
 }
 
-.contato-item a:hover {
-    text-decoration: underline;
-}
-
-/* WHATSAPP */
-.link-whatsapp img {
-    width: 70px;
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    z-index: 200;
-    opacity: 0.95;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.link-whatsapp img:hover {
-    transform: scale(1.15);
-    opacity: 1;
-}
-
-
+/* PÁGINA SOBRE */
 .pagina-sobre {
-    padding-top: 140px; /* espaço para o header */
-    min-height: 100vh;
+    padding-top: 180px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 100px;
 }
 
 .sobre-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 10%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
 }
 
+.sobre-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .sobre-texto h1 {
-    font-family: 'Montserrat', serif;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: var(--text-main);
 }
 
 .sobre-texto p {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    line-height: 1.7;
-    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.sobre-texto p:last-child {
+    margin-bottom: 0;
+}
+
+.sobre-imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sobre-imagem img {
     width: 100%;
-    height: 500px;
-    object-fit: cover;
+    max-width: 450px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(90, 74, 66, 0.15);
 }
 
-/* DROPDOWN PORTFOLIO */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-btn {
-    background: none;
-    border: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    color: #111;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    min-width: 200px;
+/* CONTATO */
+.contato {
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease;
 }
 
-.dropdown-menu a {
-    display: block;
-    padding: 12px;
+.contato-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.contato-item img {
+    width: 24px;
+    height: 24px;
+}
+
+.contato-item a {
+    color: var(--text-main);
     text-decoration: none;
-    color: #111;
-    font-size: 13px;
+    font-size: 1.1rem;
+    transition: color 0.3s;
 }
 
-.dropdown-menu a:hover {
-    background: #f5f5f5;
+.contato-item a:hover {
+    color: var(--accent-gold);
 }
 
-/* Mostrar ao passar o mouse */
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
+/* SEÇÃO DE CONTATO NOS PORTFÓLIOS */
+.portfolio-contact-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    padding-top: 80px;
+    border-top: 1px solid rgba(90, 74, 66, 0.1);
+}
+
+.portfolio-contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 50px;
+    color: var(--text-main);
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    padding: 16px 50px;
+    background: #E8DCC8;
+    color: #5a4a42;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 16px rgba(90, 74, 66, 0.12);
+    margin-bottom: 60px;
+    border: 2px solid #E8DCC8;
+}
+
+.btn-whatsapp:hover {
+    background: rgba(255, 255, 255, 0.85);
+    color: #5a4a42;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(90, 74, 66, 0.15);
+    border-color: rgba(255, 255, 255, 0.95);
+}
+
+.portfolio-contact-links {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+.contact-link img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.contact-link span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.contact-link:hover img {
+    transform: scale(1.15);
+}
+
+.contact-link:hover span {
+    color: var(--accent-gold);
+}
+
+/* WHATSAPP */
+.link-whatsapp img {
+    width: 60px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.link-whatsapp img:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
 /* LIGHTBOX */
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
+    background: rgba(253, 248, 242, 0.98);
+    display: none;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    cursor: default;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
+    z-index: 2000;
 }
 
 .lightbox.active {
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
 }
 
 .lightbox img {
     max-width: 90%;
-    max-height: 90%;
+    max-height: 85%;
     object-fit: contain;
-    cursor: default;
-    transform: scale(0.95);
-    transition: transform 0.4s ease;
+    box-shadow: 0 20px 50px rgba(90, 74, 66, 0.2);
 }
 
-.lightbox.active img {
-    transform: scale(1);
-}
-
-.lightbox::after {
-    content: "×";
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 40px;
-    color: white;
-    opacity: 0.6;
-    cursor: pointer;
-}
-
-/* Setas */
-.lightbox .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: white;
-    font-size: 48px;
-    cursor: pointer;
-    opacity: .7;
-    transition: opacity .2s ease;
-}
-
-.lightbox .nav:hover {
-    opacity: 1;
-}
-
-.lightbox .prev {
-    left: 30px;
-}
-
-.lightbox .next {
-    right: 30px;
-}
-
-/* ==============================
-   PORTFÓLIOS (GLOBAL)
-================================ */
-
-.portfolio-section {
-  width: 100%;
-  margin-top: 0;
-  padding-top: 80px;
-  background: #f1f1f1;
-  border-radius: 12px;
-  min-height: 100vh;
-}
-
-
-.portfolio-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 80px 40px;
-}
-
-.portfolio-header {
-  max-width: 650px;
-  margin: 0 auto 60px;
-  text-align: center;
-}
-
-.portfolio-header h1 {
-  font-size: 2.6rem;
-  font-weight: 500;
-  margin-bottom: 18px;
-  letter-spacing: -0.015em;
-  color: #111;
-}
-
-.portfolio-header p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #555;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 22px;
-}
-
-.portfolio-grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-  transition: transform 0.4s ease;
-}
-
-.portfolio-grid img:hover {
-  transform: scale(1.02);
-}
-
-
-@media (max-width: 900px) {
-    .sobre-container {
-        grid-template-columns: 1fr;
-        text-align: center;
+/* RESPONSIVO */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 30px 40px;
     }
-
-    .sobre-imagem img {
-        height: 350px;
+    
+    .navbar.scrolled {
+        padding: 12px 40px;
     }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+    
+    .nav-group {
+        gap: 25px;
     }
-}
-
-@media (max-width: 1100px) {
-    .grid {
-        column-count: 2;
-        padding: 0 12px;
+    
+    .nav-right {
+        gap: 25px;
+    }
+    
+    .logo {
+        width: 70px;
+    }
+    
+    .navbar.scrolled .logo {
+        width: 50px;
     }
 }
 
 @media (max-width: 1024px) {
-    .grid {
-        column-count: 2;
-    }
+    .navbar { gap: 20px; padding: 25px 30px; }
+    .navbar.scrolled { padding: 10px 30px; }
+    .nav-group { gap: 20px; }
+    .nav-right { gap: 20px; }
+    .grid { column-count: 2; }
+    .logo { width: 60px; }
+    .navbar.scrolled .logo { width: 45px; }
 }
 
 @media (max-width: 768px) {
-    .lightbox-arrow {
-        font-size: 36px;
+    .navbar {
+        padding: 20px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-
-    .lightbox-arrow.prev {
-        left: 20px;
+    
+    .navbar.scrolled {
+        padding: 10px 20px;
     }
-
-    .lightbox-arrow.next {
-        right: 20px;
+    
+    .nav-group {
+        gap: 15px;
+        font-size: 12px;
     }
-}
-
-@media (max-width: 600px) {
-    .grid {
-        column-count: 2;
-        padding: 0 8px;
+    
+    .nav-right {
+        gap: 15px;
     }
-}
-
-@media (max-width: 520px) {
-    .grid {
-        column-count: 1;
-        padding: 0 12px;
+    
+    .logo {
+        width: 50px;
+        order: -1;
+        flex: 0 0 100%;
+        margin-bottom: 10px;
     }
+    
+    .navbar.scrolled .logo {
+        width: 40px;
+    }
+    
+    .grid { column-count: 1; }
+    .hero-content h1 { font-size: 3rem; }
+    .portfolio-cards { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-    .grid {
-        grid-template-columns: 1fr;
+    .navbar {
+        padding: 15px 10px;
+    }
+    
+    .navbar a, .dropdown-btn {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+    
+    .nav-group {
+        gap: 10px;
+    }
+    
+    .nav-right {
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
     }
 }
