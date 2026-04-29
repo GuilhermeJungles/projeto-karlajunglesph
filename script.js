@@ -1,6 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================
+       CAROUSEL (SLIDER AUTOMATICO)
+    ========================= */
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    let currentSlide = 0;
+    let autoplayInterval;
+    const autoplayDelay = 5000; // 5 segundos
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    // Event listeners dos botoes
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+        stopAutoplay();
+        prevSlide();
+        startAutoplay();
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+        stopAutoplay();
+        nextSlide();
+        startAutoplay();
+    });
+
+    // Pausar autoplay ao passar o mouse
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', stopAutoplay);
+        carouselContainer.addEventListener('mouseleave', startAutoplay);
+    }
+
+    // Iniciar com o primeiro slide visivel e autoplay
+    if (slides.length > 0) {
+        showSlide(0);
+        startAutoplay();
+    }
+
+    /* =========================
        SCROLL EFFECT (HEADER & NAVBAR)
     ========================= */
     const header = document.querySelector('.header');
